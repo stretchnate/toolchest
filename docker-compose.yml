@@ -1,0 +1,9 @@
+version: '3.5'
+
+services:
+  toolchest:
+    image: stretchnate/toolchest:0.2.0
+    container_name: toolchest
+    volumes:
+      - ~/Kubernetes/helm/helmrepo/secrets:/secrets:delegated
+    tty: true
