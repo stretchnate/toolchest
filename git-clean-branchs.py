@@ -1,3 +1,5 @@
+# Usage - python3 git-clean-branches.py /var/www/html/lms 2101
+
 import sys
 import re
 import subprocess

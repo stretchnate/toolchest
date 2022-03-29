@@ -1,6 +1,8 @@
-# A CentOS 8.1 Container with gcloud and SOPS
+# Tools
+## SOPS Container
+### A CentOS 8.1 Container with gcloud and SOPS
 
-## Set Up for gcloud kms
+#### Set Up for gcloud kms
 1.  run `docker-compose up -d`
 2.  `docker exec -it toolchest /bin/bash`
 3.  `gcloud init --console-only`
@@ -13,3 +15,10 @@
 10. repeat steps 4-6
 
 Now you can run sops encrypt or decrypt commands using a gcloud kms key
+
+## Gitlab Branch Cleaner
+### A python application to delete gitlab branches
+
+This tool will find gitlab branches (on the remote repository) and delete them if they match the prefix provided. i.e. If I provide `2101` as a branch prefix the tool will match any branch that starts with 2101_. Our current directive is to keep branches for one year.
+#### Usage
+`python3 git-clean-branches.py <path to repository> <branch prefix (e.g. 2101)>`
