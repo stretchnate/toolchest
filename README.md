@@ -21,4 +21,14 @@ Now you can run sops encrypt or decrypt commands using a gcloud kms key
 
 This tool will find gitlab branches (on the remote repository) and delete them if they match the prefix provided. i.e. If I provide `2101` as a branch prefix the tool will match any branch that starts with 2101_. Our current directive is to keep branches for one year.
 #### Usage
-`python3 git-clean-branches.py <path to repository> <branch prefix (e.g. 2101)>`
+Initiate Vritual environment (if not already done)
+- `virtualenv .venv`
+
+Activate Virtual environment
+- `source .venv/bin/activate`
+
+Install argparse (if not already done)
+- `pip install argparse`
+
+Remove branches based on prefix
+- `python3 git-clean-branches.py <path to repository> <branch prefix (e.g. 2101)>`

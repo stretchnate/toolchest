@@ -1,12 +1,20 @@
-# Usage - python3 git-clean-branches.py /var/www/html/lms 2101
+# Usage `python3 git-clean-branchs.py [path] [prefix]`
+#     EXAMPLE - python3 git-clean-branches.py /var/www/html/lms 2101
 
 import sys
 import re
 import subprocess
 import datetime
+import argparse
 
-gitdir = sys.argv[1]
-prefix = sys.argv[2]
+parser = argparse.ArgumentParser(description='Integra Financial Services git branch cleaner script!')
+parser.add_argument('path', type=str, help='The path to the git project.')
+parser.add_argument('prefix', type=str, help='The branch prefix to remove (e.g. 2101)')
+
+args = parser.parse_args()
+
+gitdir = args.path
+prefix = args.prefix
 cmd_base=["git", "--git-dir="+gitdir+"/.git"]
 
 def deleteLocal(branch):
