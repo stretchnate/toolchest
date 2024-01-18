@@ -10,8 +10,11 @@ import argparse
 parser = argparse.ArgumentParser(description='Integra Financial Services git branch cleaner script!')
 parser.add_argument('path', type=str, help='The path to the git project.')
 parser.add_argument('prefix', type=str, help='The branch prefix to remove (e.g. 2101)')
+parser.add_argument('--dry-run', '-d', action='store_true', help='Whether to do a dry run')
 
 args = parser.parse_args()
+
+print("dry run = ", args.dry_run)
 
 gitdir = args.path
 prefix = args.prefix
@@ -61,19 +64,21 @@ if len(branches) >= 1:
         match = re.search(regex, branch)
         if match:
             print("deleting local branch "+str(match.group(1)))
-            dprocess=deleteLocal(match.group(1))
-            if dprocess:
-                result=dprocess.stdout.readlines()
-                if len(result) > 0:
-                    for line in result:
-                        print(line)
-                    
+            if args.dry_run == False:
+                dprocess=deleteLocal(match.group(1))
+                if dprocess:
+                    result=dprocess.stdout.readlines()
+                    if len(result) > 0:
+                        for line in result:
+                            print(line)
+                        
             print("deleting remote branch "+str(match.group(1)))
-            rprocess=deleteRemote(match.group(1))
-            if rprocess:
-                result=rprocess.stdout.readlines()
-                if len(result) > 0:
-                    for line in result:
-                        print(line)
+            if args.dry_run == False:
+                rprocess=deleteRemote(match.group(1))
+                if rprocess:
+                    result=rprocess.stdout.readlines()
+                    if len(result) > 0:
+                        for line in result:
+                            print(line)
                     
 fetch()
